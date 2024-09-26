@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="../../common/css/main.css">
+        <link rel="stylesheet" href="css/task.css">
+        <script src="../../common/js/webexp.js"></script>
+		<title>Experiment</title>
+    </head>
+
+    <body class="fit_with_scroll">
+        <div id="main_container" class="container">
+            <article class="top_bot_pad_1em main_card">
+                <header class="header_section">
+                    <h3>Syllogistic Reasoning Tasks</h3>
+				</header>
+
+                <div>
+                    <p>
+                        In the following, we will present you with several reasoning problems 
+                        consisting of two statements similar to the one below:
+                    </p>
+                    <p style="margin-bottom: 2em">
+                        As an example, consider the following example task below:
+                    </p>
+
+                    <div id="premise_box">
+                        <h4 id="premise1" class="premises">Some <span class="a_term">tailors</span> are <span class="b_term">bikers</span>.</h4>
+                        <h4 id="premise2"class="premises">All <span class="b_term">bikers</span> are <span class="c_term">teachers</span>.</h4>
+                        <hr>
+                        <h5>What, if anything, follows?</h5>
+                    </div>
+
+                    <p>
+                        You need to assume that these statements are true, even if they contradict your knowledge.
+                        Both statements are connected by a common term (<i><span class="b_term">bikers</span></i> in this example).
+                        Your task is to conclude what the relation between the other two terms (<i><span class="a_term">tailors</span></i> and <i><span class="c_term">teachers</span></i>) is.
+                        Below, several options are shown.
+                    </p>
+
+                    <p>
+                        Your task is now to select all options that are <b>follow</b> from the two statements, 
+                        which means that they <b>must be true</b>. 
+                        There are 8 response options consisting of a relation between the two terms (e.g. <i>All tailors are teachers</i>). 
+                        If you think that none of those options follows from the statement, please select that there is <i>No valid conclusion</i>.
+                    </p>
+
+                    <div id="responses_box">
+                        <div class="response_box" for="response_1">
+                            <input type="radio" id="response_1" name="response_options" value="Aac">
+                            <span for="response_1">All <span class="a_term">tailors</span> are <span class="c_term">teachers</span></span>
+                        </div>
+                        
+                        <div class="response_box" for="response_2">
+                            <input type="radio" id="response_2" name="response_options" value="Aca">
+                            <span for="response_2">All <span class="c_term">teachers</span> are <span class="a_term">tailors</span></span>
+                        </div>
+
+                        <div class="response_box" for="response_3">
+                            <input type="radio" id="response_3" name="response_options" value="Iac">
+                            <span for="response_3">Some <span class="a_term">tailors</span> are <span class="c_term">teachers</span></span>
+                        </div>
+
+                        <div class="response_box" for="response_4">
+                            <input type="radio" id="response_4" name="response_options" value="Ica">
+                            <span for="response_4">Some <span class="c_term">teachers</span> are <span class="a_term">tailors</span></span>
+                        </div>
+                        
+                        <div class="response_box" for="response_5">
+                            <input type="radio" id="response_5" name="response_options" value="Eac">
+                            <span for="response_5">No <span class="a_term">tailors</span> are <span class="c_term">teachers</span></span>
+                        </div>
+
+                        <div class="response_box" for="response_6">
+                            <input type="radio" id="response_6" name="response_options" value="Eca">
+                            <span for="response_6">No <span class="c_term">teachers</span> are <span class="a_term">tailors</span></span>
+                        </div>
+
+                        <div class="response_box" for="response_7">
+                            <input type="radio" id="response_7" name="response_options" value="Oac">
+                            <span for="response_7">Some <span class="a_term">tailors</span> are not <span class="c_term">teachers</span></span>
+                        </div>
+
+                        <div class="response_box" for="response_8">
+                            <input type="radio" id="response_8" name="response_options" value="Oca">
+                            <span for="response_8">Some <span class="c_term">teachers</span> are not <span class="a_term">tailors</span></span>
+                        </div>
+
+                        <div class="response_box" for="nvc">
+                            <input type="radio" id="nvc" name="response_options" value="nvc">
+                            <span for="nvc">No valid conclusion</span>
+                        </div>
+
+                    </div>
+
+                    <p style="margin-top: 2em;">
+                        Select <b>all</b> conclusions that <b>follow</b> from the two statements.
+                        Note that in this example, the terms were highlighted by text color. 
+                        This will not be the case in the actual tasks.
+                    </p>
+                    <p>
+                        When you are done, submit your answer by clicking on one of the two buttons below:<br>
+                        If you didn't know the answer and resorted to guessing, click <b>"I needed to guess"</b>.<br>
+                        Otherwise, if you are confident in your response, click <b>"I am confident"</b>.
+                    </p>
+                </div>
+
+                <footer class="footer_section">
+                    <button id="guess_btn" aria-busy="false" disabled>I needed to guess</button>
+                    <button id="confidence_btn" aria-busy="false" disabled>I am confident</button>
+                </footer>
+            </article>
+        </div>
+
+       
+        <script src="js/intro.js"></script>
+    </body>
+</html>

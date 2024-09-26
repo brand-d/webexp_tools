@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Example</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    <button id="btn">Get Taskset</button>
+    <p id="taskset"></p>
+
+    <script>
+        const btn = document.getElementById("btn");
+        const tasksetText = document.getElementById("taskset");
+
+        btn.addEventListener("click", async function() {
+            let taskset = null;
+
+            try {
+                // Ask for a task set
+                const response = await fetch("return_taskset.php");
+
+                if (!response.ok) {
+                    console.error(`Response status: ${response.status}`);
+                    // In this case, we couldn't connect to the PHP script or it crashed for some reason.
+                    // Maybe we can continue by selecting a taskset completly at random?
+                    taskset = "???";
+                }
+                // Read the content (decode the json)
+                const json = await response.json();
+                if(json) {
+                    // Here we have our Taskset!
+                    taskset = json;
+                } else {
+                    console.error("Didn't receive taskset...");
+                    // Something did not work with the JSON taskset (maybe locking the tasklist failed).
+                    // Again, we should deal with this (maybe by choosing random again?)
+                    taskset = "???";
+                }
+            } catch(error) {
+                console.error(`Error: ${error.message}`)
+                // Something did not work with our communication, or we received an invalid response
+                // Again, we should deal with this (maybe by choosing random again?)
+                taskset = "???";
+            }
+            
+			/* Now we have a randomly selected taskset-key.
+			 When not ???, it ensures that all tasksets have been assigned once,
+			 before the full set is repeated. To update the available tasks, just edit
+			 the tasksets.json file.
+			*/
+			
+			// As an example, we just display it here
+            tasksetText.textContent = taskset;
+            
+        });
+    </script>
+</body>
+</html>
