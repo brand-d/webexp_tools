@@ -3,11 +3,7 @@ var responseOptions = document.getElementsByName("response_options");
 var guessBtn = document.getElementById("guess_btn");
 var confidenceBtn = document.getElementById("confidence_btn");
 var interactions = [];
-function controlResponseOptions(disabledState) {
-    for(let chkbx of responseOptions) {
-        chkbx.disabled = disabledState;
-    }
-}
+
 function checkContinue() {
     for(let chkbx of responseOptions) {
         if(chkbx.checked) {
@@ -20,21 +16,18 @@ function checkContinue() {
     confidenceBtn.disabled = true;
 }
 async function handleContinue(confidence) {
-    controlResponseOptions(true);
+    setElementsDisabled(true, collection=responseOptions);
     guessBtn.disabled = true;
     guessBtn.setAttribute("aria-busy", "true");
     confidenceBtn.disabled = true;
     confidenceBtn.setAttribute("aria-busy", "true");
-    let result = [];
-    for(let chkbx of responseOptions) {
-        if(chkbx.checked) {
-            result.push(chkbx.value);
-        }
-    }
+    let result = getSelectedInputsByName(responseOptions);
+
     let personId = sessionStorage.getItem("personId");
     let payload = {
         "id": personId,
         "page" : "syllogisms_instructions",
+        "page_time" : Date.now() - pageStartTime,
         "response" : result,
         "interactions": interactions,
         "task": "IA1",

@@ -21,12 +21,6 @@ var currentTaskIdx = 0;
 var currentTask = null;
 var taskStartTime = Date.now();
 
-function controlResponseOptions(disabledState) {
-    for(let chkbx of responseOptions) {
-        chkbx.disabled = disabledState;
-    }
-}
-
 function checkContinue() {
     for(let option of responseOptions) {
         if(option.checked) {
@@ -40,7 +34,7 @@ function checkContinue() {
 }
 
 async function handleContinue(confidence) {
-    controlResponseOptions(true);
+    setElementsDisabled(true, collection=responseOptions);
     guessBtn.disabled = true;
     guessBtn.setAttribute("aria-busy", "true");
     confidenceBtn.disabled = true;
@@ -53,6 +47,7 @@ async function handleContinue(confidence) {
     let payload = {
         "id": personId,
         "page" : "syllogisms_tasks",
+        "page_time" : Date.now() - pageStartTime,
         "response" : result,
         "interactions": interactions,
         "task": currentTask["syllogism"],
@@ -117,7 +112,7 @@ function init() {
     for(let chkbx of responseOptions) {
         chkbx.addEventListener("change", function(e) {
             interactions.push({
-                "time": Date.now() - pageStartTime,
+                "time": Date.now() - taskStartTime,
                "option": chkbx.getAttribute("value")
             });
             checkContinue();
@@ -132,7 +127,7 @@ function init() {
             chkbx.checked = true;
             chkbx.focus();
             interactions.push({
-                "time": Date.now() - pageStartTime,
+                "time": Date.now() - taskStartTime,
                 "option": chkbx.getAttribute("value")
             });
 

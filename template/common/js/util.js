@@ -122,10 +122,11 @@ function getSelectedInputsByName(inputs) {
  disabled: Specifies if the elements should be disabled (true) or enabled (false).
  name: if not null, it is used to retrieve the affected elements
  classname: if not null, it is used to retrieve the affected elements
- Both name and classname can be used together, but one has to be provided.
+ collection: if not null, it has to be a collection of the elements to be affected
+ All three options (name, classname and collection) can be used together, but one has to be provided.
 */
-function setElementsDisabled(disabled, name=null, classname=null) {
-	if((name == null) && (classname == null)) {
+function setElementsDisabled(disabled, name=null, classname=null, collection=null) {
+	if((name == null) && (classname == null) && (collection == null)) {
 		throw new Error('setElementsDisabled: name or classname has to be specified.');
 	}
 	if(name != null) {
@@ -134,15 +135,19 @@ function setElementsDisabled(disabled, name=null, classname=null) {
 	if(classname != null) {
 		for(let elem of document.getElementsByClassName(classname)) elem.disabled = disabled;
 	}
+	if(collection != null) {
+		for(let elem of collection) elem.disabled = disabled;
+	}
 }
 /* Disables or enables a loading animation for all elements by name or classname. 
  loading: Specifies if the elements should show a loading animation.
  name: if not null, it is used to retrieve the affected elements
  classname: if not null, it is used to retrieve the affected elements
- Both name and classname can be used together, but one has to be provided.
+ collection: if not null, it has to be a collection of the elements to be affected
+ All three options (name, classname and collection) can be used together, but one has to be provided.
 */
-function setElementsLoading(loading, name=null, classname=null) {
-	if((name == null) && (classname == null)) {
+function setElementsLoading(loading, name=null, classname=null, collection=null) {
+	if((name == null) && (classname == null) && (collection == null)) {
 		throw new Error('setElementsDisabled: name or classname has to be specified.');
 	}
 	if(name != null) {
@@ -150,5 +155,8 @@ function setElementsLoading(loading, name=null, classname=null) {
 	}
 	if(classname != null) {
 		for(let elem of document.getElementsByClassName(classname)) elem.setAttribute("aria-busy", loading);
+	}
+	if(collection != null) {
+		for(let elem of collection) elem.setAttribute("aria-busy", loading);
 	}
 }
