@@ -47,6 +47,8 @@ The common subfolder contains three components for the experiments. A small over
 # Important Functionality
 In this section, a few of the functions provided by `webexp.js` are described. These functions should be sufficient for most of the typical interactions with the webserver and for the general flow of an experiment.
 
+- `removeCurrentTask()`: Removes the current URL from the list of tasks. It is **mandatory** to do this once the participant navigated to a task successfully, otherwise `goToNextTask` will always loop.
+- `goToNextTask()`: Navigates to the next task specified in `exp_init.js`. If the function instead loops (i.e., repeats the same task), it is likely that `removeCurrentTask()` was not called in the respective task.
 - `blockLeaving()`: Starts blocking participants from leaving the page (i.e., they might receive a warning if they attempt to close the tab or leave the page). However, this is dependent on the browser and respective settings, so that it might not work in all situations (since it would not generally a good thing to block people from leaving a page).
 - `allowLeaving()`: Releases the block introduced by `blockLeaving`.
 - `changePage(targetLocation)`: Changes the current URL/location and navigates to another page. When participants are blocked from leaving, this ensures that they are allowed to leave without seeing a warning.
@@ -57,8 +59,6 @@ In this section, a few of the functions provided by `webexp.js` are described. T
     ```
 Additionally, the path to the backend PHP-scripts can be set here. However, it is advised to use the default and not to set this parameter.
 - `writeData(payload, [personId], [phpPath])`: The corresponding function to `createFileForPerson`, which writes to the respective CSV file. The payload should be a dictionary that can be converted to JSON (i.e., that contains only primitive types like strings, numbers, booleans, lists and other dictionaries). The payload will be written as a new line to the CSV-file (with the format *timestamp;data*). If no specific personId is given, the ID will be retrieved from the sessionStorage. Therefore, it is advised to just pass a payload in most cases. If the communication with the server fails, it will retry sending the payload several times (with number, timeout and resending-delay speficied by `maxNumRetries`, `timeoutDuration` and `retryDelay`).
-- `goToNextTask()`: Navigates to the next task specified in `exp_init.js`.
-- `removeCurrentTask()`: Removes the current URL from the list of tasks. It is **mandatory** to do this once the participant navigated to a task successfully, otherwise `goToNextTask` will always loop.
 - `pageStartTime`: This field is set to the moment when the page was loaded, so that it can be used to infer the time spent on the current page (this is done by `getCurrentPageTime()`).
 - `getCurrentPageTime()`: Returns the time passed since the page was loaded.
 - `getRemainingTasksList()`: Returns the list of remaining tasks. In combination with `overwriteTasksList`, this allows to alter the tasks list (e.g., to skip certain tasks based on previous results, or to allow branching).
