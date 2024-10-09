@@ -21,7 +21,7 @@ async function handleContinue(confidence) {
     guessBtn.setAttribute("aria-busy", "true");
     confidenceBtn.disabled = true;
     confidenceBtn.setAttribute("aria-busy", "true");
-    let result = getSelectedInputsByName(responseOptions);
+    let result = getSelectedInputsFromCollection(responseOptions);
 
     let personId = sessionStorage.getItem("personId");
     let payload = {

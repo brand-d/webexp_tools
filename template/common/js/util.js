@@ -104,7 +104,7 @@ function getSelectedInputsByName(name) {
  For radio buttons, the value is returned directly,
  for checkboxes, a list of the selected responses is returned.
 */
-function getSelectedInputsByName(inputs) {
+function getSelectedInputsFromCollection(inputs) {
 	let selected = [];
 	for(let input of inputs) {
 		if(input.nodeName == "INPUT") {

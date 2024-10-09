@@ -40,3 +40,10 @@ button {
 :root[use-min-height] .footer_section {
     margin-top: auto;
 }
+
+.unselectable {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

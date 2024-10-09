@@ -9,7 +9,14 @@ function checkAllAnswered() {
         allNames.add(elem.getAttribute("name"));
         if(elem.checked) selected.add(elem.getAttribute("name"));
     }
-    continueBtn.disabled = allNames.intersection(selected).size != allNames.size;
+	var intersect = new Set(); 
+	// It is safer to do the intersection yourself
+	// Support for built-in intersection is only from 2024 onwards:
+	// Not all browsers might support it (if not updated)
+	for(var item of allNames) {
+		if(selected.has(item)) intersect.add(item);
+	}
+    continueBtn.disabled = intersect.size != allNames.size;
 }
 
 window.addEventListener("load", function() {
